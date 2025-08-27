@@ -1,4 +1,5 @@
 const express = require("express");
+const ArticleController = require("./article.controller");
 
 const articleRouter = express.Router();
 
@@ -6,40 +7,30 @@ const articleRouter = express.Router();
  * Obtiene un Post por id
  * @GET
  */
-articleRouter.get("/:id", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+articleRouter.get("/:id", ArticleController.getArticleById);
 
 /**
  * Obtiene una lista de Posts
  * @GET
  */
-articleRouter.get("/", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+articleRouter.get("/", ArticleController.getAllArticles);
 
 /**
  * Crea un Post
  * @POST
  */
-articleRouter.post("/", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+articleRouter.post("/", ArticleController.createArticle);
 
 /**
  * Modifica un Post
  * @PUT
  */
-articleRouter.put("/:id", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+articleRouter.put("/:id", ArticleController.updateArticle);
 
 /**
  * Elimina un Post
  * @DELETE
  */
-articleRouter.delete("/:id", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+articleRouter.delete("/:id", ArticleController.deleteArticle);
 
 module.exports = articleRouter;

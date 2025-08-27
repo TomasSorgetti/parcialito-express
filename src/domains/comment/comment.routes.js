@@ -1,4 +1,5 @@
 const express = require("express");
+const CommentController = require("./comment.controller");
 
 const commentRouter = express.Router();
 
@@ -6,40 +7,30 @@ const commentRouter = express.Router();
  * Obtiene un Comentario por id
  * @GET
  */
-commentRouter.get("/:id", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+commentRouter.get("/:id", CommentController.getCommentById);
 
 /**
  * Obtiene una lista de Comentarios
  * @GET
  */
-commentRouter.get("/", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+commentRouter.get("/", CommentController.getAllComments);
 
 /**
  * Crea un Comentario
  * @POST
  */
-commentRouter.post("/", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+commentRouter.post("/", CommentController.createComment);
 
 /**
  * Modifica un Comentario
  * @PUT
  */
-commentRouter.put("/:id", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+commentRouter.put("/:id", CommentController.updateComment);
 
 /**
  * Elimina un Comentario
  * @DELETE
  */
-commentRouter.delete("/:id", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+commentRouter.delete("/:id", CommentController.deleteComment);
 
 module.exports = commentRouter;
