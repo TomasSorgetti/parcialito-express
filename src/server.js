@@ -14,7 +14,7 @@ server.use(express.json());
 server.use(morgan("dev"));
 server.use(cors());
 
-server.use(mainRouter);
+server.use("/api", mainRouter);
 
 server.listen(port, () => {
   console.log("- - - - - - - - - - - - - - - - -");

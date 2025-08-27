@@ -1,13 +1,10 @@
 const express = require("express");
+const postRouter = require("./domains/post/post.routes");
+const userRouter = require("./domains/user/user.routes");
 
 const mainRouter = express.Router();
 
-mainRouter.use("/ping", (req, res) => {
-  res.send("Pong");
-});
-
-mainRouter.use("/api", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+mainRouter.use("/user", userRouter);
+mainRouter.use("/blog", postRouter);
 
 module.exports = mainRouter;
