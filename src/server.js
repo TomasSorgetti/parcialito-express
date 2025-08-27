@@ -1,23 +1,21 @@
 const express = require("express");
+const path = require("path");
 const morgan = require("morgan");
 const cors = require("cors");
+
 const mainRouter = require("./routes");
-
-const dotenv = require("dotenv");
-dotenv.config();
-
-const port = process.env.PORT || 8081;
 
 const server = express();
 
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(cors());
+server.use(express.static(path.join(__dirname, "../public")));
+
+server.use("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
+});
 
 server.use("/api", mainRouter);
 
-server.listen(port, () => {
-  console.log("- - - - - - - - - - - - - - - - -");
-  console.log(`Server running on http://localhost:${port}`);
-  console.log("- - - - - - - - - - - - - - - - -");
-});
+module.exports = server;
