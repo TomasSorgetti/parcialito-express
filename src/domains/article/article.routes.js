@@ -1,12 +1,12 @@
 const express = require("express");
 
-const postRouter = express.Router();
+const articleRouter = express.Router();
 
 /**
  * Obtiene un Post por id
  * @GET
  */
-postRouter.get("/:id", (req, res) => {
+articleRouter.get("/:id", (req, res) => {
   res.status(200).json({ msg: "OK" });
 });
 
@@ -14,7 +14,7 @@ postRouter.get("/:id", (req, res) => {
  * Obtiene una lista de Posts
  * @GET
  */
-postRouter.get("/", (req, res) => {
+articleRouter.get("/", (req, res) => {
   res.status(200).json({ msg: "OK" });
 });
 
@@ -22,7 +22,7 @@ postRouter.get("/", (req, res) => {
  * Crea un Post
  * @POST
  */
-postRouter.post("/", (req, res) => {
+articleRouter.post("/", (req, res) => {
   res.status(200).json({ msg: "OK" });
 });
 
@@ -30,7 +30,7 @@ postRouter.post("/", (req, res) => {
  * Modifica un Post
  * @PUT
  */
-postRouter.put("/:id", (req, res) => {
+articleRouter.put("/:id", (req, res) => {
   res.status(200).json({ msg: "OK" });
 });
 
@@ -38,8 +38,8 @@ postRouter.put("/:id", (req, res) => {
  * Elimina un Post
  * @DELETE
  */
-postRouter.delete("/:id", (req, res) => {
+articleRouter.delete("/:id", (req, res) => {
   res.status(200).json({ msg: "OK" });
 });
 
-module.exports = postRouter;
+module.exports = articleRouter;
