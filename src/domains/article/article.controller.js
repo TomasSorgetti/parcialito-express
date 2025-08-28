@@ -20,4 +20,4 @@ class ArticleController {
   }
 }
 
-module.exports = new ArticleController();
+export default new ArticleController();

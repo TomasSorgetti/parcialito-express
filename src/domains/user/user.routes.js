@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 
 const userRouter = express.Router();
 
@@ -34,4 +34,4 @@ userRouter.delete("/", (req, res) => {
   res.status(200).json({ msg: "OK" });
 });
 
-module.exports = userRouter;
+export default userRouter;

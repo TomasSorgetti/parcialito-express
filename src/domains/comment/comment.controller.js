@@ -20,4 +20,4 @@ class CommentController {
   }
 }
 
-module.exports = new CommentController();
+export default new CommentController();

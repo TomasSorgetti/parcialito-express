@@ -1,15 +1,20 @@
-const express = require("express");
-const path = require("path");
-const morgan = require("morgan");
-const cors = require("cors");
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const mainRouter = require("./routes");
+import mainRouter from "./routes.js";
 
 const server = express();
 
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(cors());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 server.use(express.static(path.join(__dirname, "../public")));
 
 server.get("/", (req, res) => {
@@ -18,4 +23,4 @@ server.get("/", (req, res) => {
 
 server.use("/api", mainRouter);
 
-module.exports = server;
+export default server;

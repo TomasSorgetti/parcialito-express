@@ -1,7 +1,7 @@
-const express = require("express");
-const articleRouter = require("./domains/article/article.routes");
-const commentRouter = require("./domains/comment/comment.routes");
-const userRouter = require("./domains/user/user.routes");
+import express from "express";
+import articleRouter from "./domains/article/article.routes.js";
+import commentRouter from "./domains/comment/comment.routes.js";
+import userRouter from "./domains/user/user.routes.js";
 
 const mainRouter = express.Router();
 
@@ -10,4 +10,4 @@ mainRouter.use("/articles", articleRouter);
 mainRouter.use("/comments", commentRouter);
 mainRouter.use("/categories", commentRouter);
 
-module.exports = mainRouter;
+export default mainRouter;
