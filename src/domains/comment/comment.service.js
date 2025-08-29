@@ -1,4 +1,11 @@
 class CommentService {
+  constructor({ commentRepository }) {
+    if (!commentRepository) {
+      throw new Error("CommentRepository is required");
+    }
+    this.commentRepository = commentRepository;
+  }
+
   async getById(id) {
     return { msg: "NOT_IMPLEMENTED" };
   }

@@ -1,4 +1,11 @@
 class ArticleService {
+  constructor({ articleRepository }) {
+    if (!articleRepository) {
+      throw new Error("ArticleRepository is required");
+    }
+    this.articleRepository = articleRepository;
+  }
+
   async getById(id) {
     return { msg: "NOT_IMPLEMENTED" };
   }

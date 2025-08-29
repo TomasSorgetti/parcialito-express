@@ -1,4 +1,11 @@
 class CategoryService {
+  constructor({ categoryRepository }) {
+    if (!categoryRepository) {
+      throw new Error("CategoryRepository is required");
+    }
+    this.categoryRepository = categoryRepository;
+  }
+
   async getById(id) {
     return { msg: "NOT_IMPLEMENTED" };
   }
