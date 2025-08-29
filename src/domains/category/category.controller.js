@@ -1,23 +1,58 @@
 class CategoryController {
-  async getAllCategories(req, res) {
-    res.send("Ok");
+  constructor({ categoryService }) {
+    if (!categoryService) {
+      throw new Error("CategoryService is required");
+    }
+    this.categoryService = categoryService;
   }
 
-  async getCategoryById(req, res) {
-    res.send("Ok");
+  async getById(req, res) {
+    try {
+      const category = await this.categoryService.getById(req.params.id);
+      res.status(200).json(category);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
 
-  async createCategory(req, res) {
-    res.send("Ok");
+  async getAll(req, res) {
+    try {
+      const categories = await this.categoryService.getAll();
+      res.status(200).json(categories);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
 
-  async updateCategory(req, res) {
-    res.send("Ok");
+  async create(req, res) {
+    try {
+      const category = await this.categoryService.create(req.body);
+      res.status(201).json(category);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
 
-  async deleteCategory(req, res) {
-    res.send("Ok");
+  async update(req, res) {
+    try {
+      const category = await this.categoryService.update(
+        req.params.id,
+        req.body
+      );
+      res.status(200).json(category);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const result = await this.categoryService.delete(req.params.id);
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
   }
 }
 
-export default new CategoryController();
+export default CategoryController;

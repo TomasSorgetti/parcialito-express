@@ -1,37 +1,22 @@
 import express from "express";
 
-const userRouter = express.Router();
+class UserRouter {
+  constructor({ userController }) {
+    if (!userController) {
+      throw new Error("UserController is required");
+    }
+    this.router = express.Router();
+    this.controller = userController;
+    this.setupRoutes();
+  }
 
-/**
- * Obtiene un Usuario por id
- * @GET
- */
-userRouter.get("/:id", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+  setupRoutes() {
+    this.router.get("/", this.controller.getAll.bind(this.controller));
+  }
 
-/**
- * Obtiene una lista de Usuarios
- * @GET
- */
-userRouter.get("/", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
+  getRouter() {
+    return this.router;
+  }
+}
 
-/**
- * Modifica un Usuario
- * @PUT
- */
-userRouter.put("/", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
-
-/**
- * Elimina un Usuario
- * @DELETE
- */
-userRouter.delete("/", (req, res) => {
-  res.status(200).json({ msg: "OK" });
-});
-
-export default userRouter;
+export default UserRouter;

@@ -1,36 +1,26 @@
 import express from "express";
-import CommentController from "./comment.controller.js";
 
-const commentRouter = express.Router();
+class CommentRouter {
+  constructor({ commentController }) {
+    if (!commentController) {
+      throw new Error("commentController is required");
+    }
+    this.router = express.Router();
+    this.controller = commentController;
+    this.setupRoutes();
+  }
 
-/**
- * Obtiene un Comentario por id
- * @GET
- */
-commentRouter.get("/:id", CommentController.getCommentById);
+  setupRoutes() {
+    this.router.get("/:id", this.controller.getById.bind(this.controller));
+    this.router.get("/", this.controller.getAll.bind(this.controller));
+    this.router.post("/", this.controller.create.bind(this.controller));
+    this.router.put("/:id", this.controller.update.bind(this.controller));
+    this.router.delete("/:id", this.controller.delete.bind(this.controller));
+  }
 
-/**
- * Obtiene una lista de Comentarios
- * @GET
- */
-commentRouter.get("/", CommentController.getAllComments);
+  getRouter() {
+    return this.router;
+  }
+}
 
-/**
- * Crea un Comentario
- * @POST
- */
-commentRouter.post("/", CommentController.createComment);
-
-/**
- * Modifica un Comentario
- * @PUT
- */
-commentRouter.put("/:id", CommentController.updateComment);
-
-/**
- * Elimina un Comentario
- * @DELETE
- */
-commentRouter.delete("/:id", CommentController.deleteComment);
-
-export default commentRouter;
+export default CommentRouter;

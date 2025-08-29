@@ -4,7 +4,8 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import mainRouter from "./routes.js";
+import Container from "./di/container.js";
+import MainRouter from "./routes/main.router.js";
 
 const server = express();
 
@@ -21,6 +22,10 @@ server.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
-server.use("/api", mainRouter);
+const container = new Container();
+const dependencies = container.getDependencies();
+
+const mainRouter = new MainRouter(dependencies);
+server.use("/api", mainRouter.getRouter());
 
 export default server;

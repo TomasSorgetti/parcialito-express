@@ -1,36 +1,26 @@
 import express from "express";
-import CategoryController from "./category.controller.js";
 
-const categoryRouter = express.Router();
+class CategoryRouter {
+  constructor({ categoryController }) {
+    if (!categoryController) {
+      throw new Error("CategoryController is required");
+    }
+    this.router = express.Router();
+    this.controller = categoryController;
+    this.setupRoutes();
+  }
 
-/**
- * Obtiene una Categoría por id
- * @GET
- */
-categoryRouter.get("/:id", CategoryController.getCategoryById);
+  setupRoutes() {
+    this.router.get("/:id", this.controller.getById.bind(this.controller));
+    this.router.get("/", this.controller.getAll.bind(this.controller));
+    this.router.post("/", this.controller.create.bind(this.controller));
+    this.router.put("/:id", this.controller.update.bind(this.controller));
+    this.router.delete("/:id", this.controller.delete.bind(this.controller));
+  }
 
-/**
- * Obtiene una lista de Categorías
- * @GET
- */
-categoryRouter.get("/", CategoryController.getAllCategories);
+  getRouter() {
+    return this.router;
+  }
+}
 
-/**
- * Crea una Categoría
- * @POST
- */
-categoryRouter.Categoría("/", CategoryController.createCategory);
-
-/**
- * Modifica una Categoría
- * @PUT
- */
-categoryRouter.put("/:id", CategoryController.updateCategory);
-
-/**
- * Elimina una Categoría
- * @DELETE
- */
-categoryRouter.delete("/:id", CategoryController.deleteCategory);
-
-export default categoryRouter;
+export default CategoryRouter;

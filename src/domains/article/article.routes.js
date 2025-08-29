@@ -1,35 +1,26 @@
 import express from "express";
-import ArticleController from "./article.controller.js";
-const articleRouter = express.Router();
 
-/**
- * Obtiene un Post por id
- * @GET
- */
-articleRouter.get("/:id", ArticleController.getArticleById);
+class ArticleRouter {
+  constructor({ articleController }) {
+    if (!articleController) {
+      throw new Error("ArticleController is required");
+    }
+    this.router = express.Router();
+    this.controller = articleController;
+    this.setupRoutes();
+  }
 
-/**
- * Obtiene una lista de Posts
- * @GET
- */
-articleRouter.get("/", ArticleController.getAllArticles);
+  setupRoutes() {
+    this.router.get("/:id", this.controller.getById.bind(this.controller));
+    this.router.get("/", this.controller.getAll.bind(this.controller));
+    this.router.post("/", this.controller.create.bind(this.controller));
+    this.router.put("/:id", this.controller.update.bind(this.controller));
+    this.router.delete("/:id", this.controller.delete.bind(this.controller));
+  }
 
-/**
- * Crea un Post
- * @POST
- */
-articleRouter.post("/", ArticleController.createArticle);
+  getRouter() {
+    return this.router;
+  }
+}
 
-/**
- * Modifica un Post
- * @PUT
- */
-articleRouter.put("/:id", ArticleController.updateArticle);
-
-/**
- * Elimina un Post
- * @DELETE
- */
-articleRouter.delete("/:id", ArticleController.deleteArticle);
-
-export default articleRouter;
+export default ArticleRouter;
