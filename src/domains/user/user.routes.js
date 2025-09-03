@@ -1,5 +1,6 @@
 import express from "express";
 import { MissingDependencyError } from "../../shared/errors/index.js";
+import LoginInputValidation from "./validations/login.validation.js";
 
 class UserRouter {
   constructor({ userController }) {
@@ -15,6 +16,11 @@ class UserRouter {
 
   setupRoutes() {
     this.router.get("/", this.controller.getAll.bind(this.controller));
+    this.router.post(
+      "/login",
+      new LoginInputValidation().middleware(),
+      this.controller.login.bind(this.controller)
+    );
   }
 
   getRouter() {

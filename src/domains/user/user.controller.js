@@ -18,6 +18,16 @@ class UserController {
       next(error);
     }
   }
+
+  async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+
+      res.status(200).json({ user: { email, password } });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default UserController;
