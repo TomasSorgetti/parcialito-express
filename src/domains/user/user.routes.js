@@ -1,9 +1,12 @@
 import express from "express";
+import { MissingDependencyError } from "../../shared/errors/index.js";
 
 class UserRouter {
   constructor({ userController }) {
     if (!userController) {
-      throw new Error("UserController is required");
+      throw new MissingDependencyError("UserController is required", {
+        dependency: "UserController",
+      });
     }
     this.router = express.Router();
     this.controller = userController;

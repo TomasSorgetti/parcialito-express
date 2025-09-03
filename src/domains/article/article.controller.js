@@ -1,53 +1,57 @@
+import { MissingDependencyError } from "../../shared/errors/index.js";
+
 class ArticleController {
   constructor({ articleService }) {
     if (!articleService) {
-      throw new Error("ArticleService is required");
+      throw new MissingDependencyError("ArticleService is required", {
+        dependency: "ArticleService",
+      });
     }
     this.articleService = articleService;
   }
 
-  async getById(req, res) {
+  async getById(req, res, next) {
     try {
       const article = await this.articleService.getById(req.params.id);
       res.status(200).json(article);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
       const articles = await this.articleService.getAll();
       res.status(200).json(articles);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       const article = await this.articleService.create(req.body);
       res.status(201).json(article);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async update(req, res) {
+  async update(req, res, next) {
     try {
       const article = await this.articleService.update(req.params.id, req.body);
       res.status(200).json(article);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     try {
       const result = await this.articleService.delete(req.params.id);
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 }

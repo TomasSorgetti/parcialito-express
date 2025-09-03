@@ -1,17 +1,21 @@
+import { MissingDependencyError } from "../../shared/errors/index.js";
+
 class UserController {
   constructor({ userService }) {
     if (!userService) {
-      throw new Error("UserService is required");
+      throw new MissingDependencyError("UserService is required", {
+        dependency: "UserService",
+      });
     }
     this.userService = userService;
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
       const users = await this.userService.getAll();
       res.status(200).json(users);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 }

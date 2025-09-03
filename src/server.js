@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import Container from "./di/container.js";
 import MainRouter from "./routes/main.router.js";
+import errorMiddleware from "./shared/middlewares/error.middleware.js";
 
 initializeConfig()
   .then((config) => {
@@ -29,6 +30,8 @@ initializeConfig()
 
     const mainRouter = new MainRouter(dependencies);
     server.use("/api", mainRouter.getRouter());
+
+    server.use(errorMiddleware);
 
     const port = config.env.PORT;
 

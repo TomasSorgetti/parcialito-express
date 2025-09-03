@@ -1,39 +1,43 @@
+import { MissingDependencyError } from "../../shared/errors/index.js";
+
 class CategoryController {
   constructor({ categoryService }) {
     if (!categoryService) {
-      throw new Error("CategoryService is required");
+      throw new MissingDependencyError("CategoryService is required", {
+        dependency: "CategoryService",
+      });
     }
     this.categoryService = categoryService;
   }
 
-  async getById(req, res) {
+  async getById(req, res, next) {
     try {
       const category = await this.categoryService.getById(req.params.id);
       res.status(200).json(category);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     try {
       const categories = await this.categoryService.getAll();
       res.status(200).json(categories);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       const category = await this.categoryService.create(req.body);
       res.status(201).json(category);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async update(req, res) {
+  async update(req, res, next) {
     try {
       const category = await this.categoryService.update(
         req.params.id,
@@ -41,16 +45,16 @@ class CategoryController {
       );
       res.status(200).json(category);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     try {
       const result = await this.categoryService.delete(req.params.id);
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      next(error);
     }
   }
 }

@@ -1,9 +1,12 @@
 import express from "express";
+import { MissingDependencyError } from "../../shared/errors/index.js";
 
 class CommentRouter {
   constructor({ commentController }) {
     if (!commentController) {
-      throw new Error("commentController is required");
+      throw new MissingDependencyError("commentController is required", {
+        dependency: "commentController",
+      });
     }
     this.router = express.Router();
     this.controller = commentController;
