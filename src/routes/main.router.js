@@ -3,6 +3,7 @@ import ArticleRouter from "../domains/article/article.routes.js";
 import CategoryRouter from "../domains/category/category.routes.js";
 import CommentRouter from "../domains/comment/comment.routes.js";
 import UserRouter from "../domains/user/user.routes.js";
+import AuthRouter from "../domains/auth/auth.routes.js";
 
 class MainRouter {
   constructor(dependencies = {}) {
@@ -23,11 +24,15 @@ class MainRouter {
     const userRouter = new UserRouter({
       userController: dependencies.controllers.userController,
     });
+    const authRouter = new AuthRouter({
+      authController: dependencies.controllers.authController,
+    });
 
     this.router.use("/articles", articleRouter.getRouter());
     this.router.use("/categories", categoryRouter.getRouter());
     this.router.use("/comments", commentRouter.getRouter());
     this.router.use("/users", userRouter.getRouter());
+    this.router.use("/auth", authRouter.getRouter());
   }
 
   getRouter() {

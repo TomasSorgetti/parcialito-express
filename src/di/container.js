@@ -9,14 +9,16 @@ import ArticleService from "../domains/article/article.service.js";
 import CategoryService from "../domains/category/category.service.js";
 import CommentService from "../domains/comment/comment.service.js";
 import UserService from "../domains/user/user.service.js";
+import AuthService from "../domains/auth/auth.service.js";
 
 // Controllers imports
 import ArticleController from "../domains/article/article.controller.js";
 import CategoryController from "../domains/category/category.controller.js";
 import CommentController from "../domains/comment/comment.controller.js";
 import UserController from "../domains/user/user.controller.js";
+import AuthController from "../domains/auth/auth.controller.js";
 
-class Container {
+export default class Container {
   constructor(config = {}) {
     this.config = config;
     this.repositories = {};
@@ -45,6 +47,9 @@ class Container {
     this.services.userService = new UserService({
       userRepository: this.repositories.userRepository,
     });
+    this.services.authService = new AuthService({
+      userRepository: this.repositories.userRepository,
+    });
 
     // Controllers instances
     this.controllers.articleController = new ArticleController({
@@ -59,6 +64,9 @@ class Container {
     this.controllers.userController = new UserController({
       userService: this.services.userService,
     });
+    this.controllers.authController = new AuthController({
+      authService: this.services.authService,
+    });
   }
 
   getDependencies() {
@@ -69,5 +77,3 @@ class Container {
     };
   }
 }
-
-export default Container;
