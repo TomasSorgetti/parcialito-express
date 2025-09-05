@@ -2,11 +2,10 @@ import express from "express";
 import { initializeConfig } from "./shared/config/index.js";
 import morgan from "morgan";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
 import Container from "./di/container.js";
 import MainRouter from "./routes/main.router.js";
 import errorMiddleware from "./shared/middlewares/error.middleware.js";
+import { handler as ssrHandler } from "../public/dist/server/entry.mjs";
 
 initializeConfig()
   .then((config) => {
@@ -16,14 +15,11 @@ initializeConfig()
     server.use(morgan("dev"));
     server.use(cors());
 
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    // const __filename = fileURLToPath(import.meta.url);
+    // const __dirname = path.dirname(__filename);
 
-    server.use(express.static(path.join(__dirname, "../public")));
-
-    server.get("/", (req, res) => {
-      res.sendFile(path.join(__dirname, "../public", "index.html"));
-    });
+    // server.use(express.static(path.join(__dirname, "../public")));
+    server.get("/", ssrHandler);
 
     const container = new Container(config);
     const dependencies = container.getDependencies();

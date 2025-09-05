@@ -1,0 +1,18 @@
+---
+import Code from "../components/ui/Code.astro";
+import Layout from "../layouts/Layout.astro";
+const data = {
+  id: 1,
+  name: "Tomas",
+  apellido: "Sorgetti",
+};
+---
+
+<Layout>
+  <main class="py-20">
+    <section class="mx-auto container">
+      <h1 class="text-3xl font-bold">API Docs</h1>
+      <Code data={data} />
+    </section>
+  </main>
+</Layout>
