@@ -15,6 +15,7 @@ class UserRouter {
 
   setupRoutes() {
     this.router.get("/", this.controller.getAll.bind(this.controller));
+    this.router.post("/", this.controller.create.bind(this.controller));
   }
 
   getRouter() {

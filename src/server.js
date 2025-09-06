@@ -32,6 +32,9 @@ initializeConfig()
 
     const mainRouter = new MainRouter(dependencies);
     server.use("/api", mainRouter.getRouter());
+    server.use("/ping", (req, res) => {
+      res.status(200).send("Ok");
+    });
 
     server.use(errorMiddleware);
 

@@ -19,11 +19,16 @@ class UserController {
     }
   }
 
-  async login(req, res, next) {
+  async create(req, res, next) {
     try {
-      const { email, password } = req.body;
+      const { username, email, password } = req.body;
 
-      res.status(200).json({ user: { email, password } });
+      await this.userService.create({
+        username,
+        email,
+        password,
+      });
+      res.status(201).json({ status: "ok", message: "User created" });
     } catch (error) {
       next(error);
     }

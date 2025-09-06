@@ -9,6 +9,10 @@ class UserService {
   async getAll() {
     return await this.userRepository.findAll();
   }
+  
+  async create(data) {
+    return await this.userRepository.create(data);
+  }
 }
 
 export default UserService;
