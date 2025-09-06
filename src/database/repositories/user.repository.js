@@ -8,6 +8,7 @@ class UserRepository {
   }
 
   async findAll() {
+    return [];
     return [
       { id: 1, title: "Article 1", content: "Sample content 1" },
       { id: 2, title: "Article 2", content: "Sample content 2" },

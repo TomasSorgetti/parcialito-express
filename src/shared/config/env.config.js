@@ -5,7 +5,8 @@ dotenvConfig();
 
 const env = cleanEnv(process.env, {
   PORT: port({ default: 8080 }),
-  DB_URL: str({ default: "mongodb://localhost:27017/parcial" }),
+  MONGO_URL: str({ default: "mongodb://localhost:27017/" }),
+  MONGO_DB_NAME: str({ default: "portfolio" }),
 });
 
 export default env;
