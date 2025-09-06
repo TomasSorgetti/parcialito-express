@@ -55,6 +55,44 @@ Los usuarios pueden registrarse, crear y gestionar artículos, interactuar media
   - API Keys para acceso externo a artículos (con scopes y rate limiting).
 - Monitoreo: to think.
 
+## How to start
+
+### env
+
+Add a .env file with this variables
+
+```sh
+# Entorno
+PORT=8080
+NODE_ENV=development # or production
+
+# MongoDB
+MONGO_URL=mongodb://mongo:27017
+MONGO_DB_NAME=parcial_express
+
+# Redis
+REDIS_URL=redis://redis:6379
+
+# Elasticsearch
+ELASTICSEARCH_URL=http://elasticsearch:9200
+```
+
+### start project
+
+```sh
+# go into your project folder
+cd your_project/
+
+# build and start application with docker
+docker-compose up --build
+```
+
+Test endpoints at
+
+```sh
+@GET http://localhost/ping
+```
+
 ## Arquitectura
 
 ```sh
