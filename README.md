@@ -6,35 +6,35 @@ Los usuarios pueden registrarse, crear y gestionar artículos, interactuar media
 
 ### Gestión de Artículos
 
-    - Crear, editar, listar y eliminar artículos (CRUD).
-    - Filtros dinámicos por autor, fecha, tags o popularidad (basado en stars).
+- Crear, editar, listar y eliminar artículos (CRUD).
+- Filtros dinámicos por autor, fecha, tags o popularidad (basado en stars).
 
 ### Searchbar
 
-    - Búsqueda full-text de artículos por título, contenido o tags usando Elasticsearch.
-    - Soporte para autocompletado y resaltado de resultados (en plan Pro/Premium).
+- Búsqueda full-text de artículos por título, contenido o tags usando Elasticsearch.
+- Soporte para autocompletado y resaltado de resultados (en plan Pro/Premium).
 
 ### Interacciones Sociales
 
-    - Comentar artículos (con posibilidad de discusiones en tiempo real para Pro/Premium).
-    - Sistema de "stars" para marcar artículos favoritos, con contadores visibles.
+- Comentar artículos (con posibilidad de discusiones en tiempo real para Pro/Premium).
+- Sistema de "stars" para marcar artículos favoritos, con contadores visibles.
 
 ### Suscripciones
 
-    - Planes Free (lectura básica, límite de 1-2 posts/mes), Pro (edición ilimitada, filtros avanzados, comentarios) y Premium (acceso completo a AI, stars ilimitados).
-    - Dashboard de usuario para ver límites y estado del plan.
+- Planes Free (lectura básica, límite de 1-2 posts/mes), Pro (edición ilimitada, filtros avanzados, comentarios) y Premium (acceso completo a AI, stars ilimitados).
+- Dashboard de usuario para ver límites y estado del plan.
 
 ### Integración de AI (Premium)
 
-    - Generación de borradores de artículos a partir de prompts (e.g., "Tutorial Node.js con ejemplos SOLID").
-    - Recomendaciones personalizadas basadas en stars o historial.
-    - Moderación automática de comentarios (opcional, para evitar spam/toxicity).
+- Generación de borradores de artículos a partir de prompts (e.g., "Tutorial Node.js con ejemplos SOLID").
+- Recomendaciones personalizadas basadas en stars o historial.
+- Moderación automática de comentarios (opcional, para evitar spam/toxicity).
 
 ### Escalabilidad y Performance
 
-    - Cacheo con Redis para consultas frecuentes (e.g., checks de permisos, contadores de stars).
-    - Colas de trabajo con RabbitMQ o Kafka para tareas asíncronas (envío de emails, procesamiento de AI).
-    - Despliegue con Docker para entornos consistentes.
+- Cacheo con Redis para consultas frecuentes (e.g., checks de permisos, contadores de stars).
+- Colas de trabajo con RabbitMQ o Kafka para tareas asíncronas (envío de emails, procesamiento de AI).
+- Despliegue con Docker para entornos consistentes.
 
 ## Tecnologías
 
@@ -45,13 +45,14 @@ Los usuarios pueden registrarse, crear y gestionar artículos, interactuar media
 - Colas de Trabajo: RabbitMQ o Kafka (tareas asíncronas como notificaciones o generación de AI).
 - Contenerización: Docker (entornos locales y pruebas).
 - Autenticación: JWT para sesiones y RBAC para permisos por plan.
-- Monitoreo (opcional): Prometheus o ELK stack para métricas.
+- Monitoreo: to think.
 
 ## Arquitectura
 
+```sh
 /
 ├── public/ # Api docs
-│ └── favicon.svg  
+│ └── favicon.svg
 ├── src
 │ ├── database #mongodb
 │ │ ├── repositories/
@@ -88,3 +89,5 @@ Los usuarios pueden registrarse, crear y gestionar artículos, interactuar media
 │ │
 │ └── server.js
 └── package.json
+
+```
